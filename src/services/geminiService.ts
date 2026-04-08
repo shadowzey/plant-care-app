@@ -32,7 +32,7 @@ export async function identifyPlant(base64Image: string, mimeType: string): Prom
             },
           },
           {
-            text: "Identify this plant and provide detailed care instructions. Return the data in JSON format.",
+            text: "请识别这张图片中的植物并提供详细的养护说明。请使用中文返回 JSON 格式的数据。",
           },
         ],
       },
@@ -42,27 +42,28 @@ export async function identifyPlant(base64Image: string, mimeType: string): Prom
       responseSchema: {
         type: Type.OBJECT,
         properties: {
-          name: { type: Type.STRING },
-          scientificName: { type: Type.STRING },
-          confidence: { type: Type.NUMBER },
-          description: { type: Type.STRING },
+          name: { type: Type.STRING, description: "植物名称" },
+          scientificName: { type: Type.STRING, description: "学名" },
+          confidence: { type: Type.NUMBER, description: "识别置信度" },
+          description: { type: Type.STRING, description: "植物描述" },
           careInstructions: {
             type: Type.OBJECT,
             properties: {
-              watering: { type: Type.STRING },
-              light: { type: Type.STRING },
-              soil: { type: Type.STRING },
-              temperature: { type: Type.STRING },
-              humidity: { type: Type.STRING },
-              fertilizing: { type: Type.STRING },
+              watering: { type: Type.STRING, description: "浇水建议" },
+              light: { type: Type.STRING, description: "光照要求" },
+              soil: { type: Type.STRING, description: "土壤要求" },
+              temperature: { type: Type.STRING, description: "温度要求" },
+              humidity: { type: Type.STRING, description: "湿度要求" },
+              fertilizing: { type: Type.STRING, description: "施肥建议" },
             },
             required: ["watering", "light", "soil", "temperature", "humidity", "fertilizing"],
           },
           commonIssues: {
             type: Type.ARRAY,
             items: { type: Type.STRING },
+            description: "常见问题"
           },
-          funFact: { type: Type.STRING },
+          funFact: { type: Type.STRING, description: "趣味小知识" },
         },
         required: ["name", "scientificName", "confidence", "description", "careInstructions", "commonIssues", "funFact"],
       },
@@ -76,7 +77,7 @@ export async function* chatWithAssistant(message: string, history: { role: 'user
   const chat = ai.chats.create({
     model: "gemini-3-flash-preview",
     config: {
-      systemInstruction: "You are Flora, an expert gardening assistant. You are helpful, friendly, and knowledgeable about all types of plants, gardening techniques, and pest control. Keep your answers concise but informative. Use markdown for formatting.",
+      systemInstruction: "你是一位名叫 Flora 的专业园艺助手。你乐于助人、友善，并且精通各种植物、园艺技术和病虫害防治。请用中文回答，保持简洁但富有信息量。使用 markdown 格式。",
     },
     history: history,
   });

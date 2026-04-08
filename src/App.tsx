@@ -39,7 +39,7 @@ const LoadingOverlay = ({ message }: { message: string }) => (
   >
     <div className="bg-white rounded-3xl p-8 max-w-sm w-full shadow-2xl flex flex-col items-center text-center">
       <Loader2 className="w-12 h-12 text-sage-600 animate-spin mb-4" />
-      <h3 className="text-xl font-serif font-bold text-sage-900 mb-2">Analyzing your plant...</h3>
+      <h3 className="text-xl font-serif font-bold text-sage-900 mb-2">正在分析您的植物...</h3>
       <p className="text-sage-600 italic">{message}</p>
     </div>
   </motion.div>
@@ -69,11 +69,11 @@ export default function App() {
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   const loadingMessages = [
-    "Identifying botanical features...",
-    "Consulting our plant database...",
-    "Analyzing leaf patterns and textures...",
-    "Determining optimal care conditions...",
-    "Almost there! Preparing your guide..."
+    "正在识别植物特征...",
+    "正在查阅植物数据库...",
+    "正在分析叶片图案和纹理...",
+    "正在确定最佳养护条件...",
+    "马上就好！正在准备您的指南..."
   ];
 
   useEffect(() => {
@@ -115,12 +115,12 @@ export default function App() {
       setChatMessages([
         { 
           role: 'model', 
-          content: `Hi! I've identified your plant as a **${info.name}**. It's a beautiful choice! I've prepared a detailed care guide for you. Do you have any specific questions about it?` 
+          content: `你好！我已经识别出你的植物是 **${info.name}**。这是一个非常棒的选择！我为你准备了详细的养护指南。你对它有什么具体的问题吗？` 
         }
       ]);
     } catch (error) {
       console.error("Identification failed:", error);
-      alert("Sorry, I couldn't identify this plant. Please try a clearer photo.");
+      alert("抱歉，我无法识别这株植物。请尝试拍摄更清晰的照片。");
     } finally {
       setIsAnalyzing(false);
     }
@@ -169,7 +169,7 @@ export default function App() {
             <div className="bg-sage-600 p-2 rounded-xl">
               <Leaf className="w-6 h-6 text-white" />
             </div>
-            <h1 className="text-2xl font-serif font-bold text-sage-900">FloraCare AI</h1>
+            <h1 className="text-2xl font-serif font-bold text-sage-900">植护 AI</h1>
           </div>
           <button 
             onClick={() => setIsChatOpen(!isChatOpen)}
@@ -197,11 +197,11 @@ export default function App() {
           >
             <div className="max-w-2xl">
               <h2 className="text-5xl md:text-6xl font-serif font-bold text-sage-950 mb-6 leading-tight">
-                Identify any plant <br />
-                <span className="text-sage-500 italic">with a single photo.</span>
+                只需一张照片，<br />
+                <span className="text-sage-500 italic">即可识别任何植物。</span>
               </h2>
               <p className="text-lg text-sage-600 mb-10">
-                Get instant care guides, watering schedules, and expert advice for your green friends.
+                获取即时养护指南、浇水计划以及针对您的绿色朋友的专家建议。
               </p>
             </div>
 
@@ -213,8 +213,8 @@ export default function App() {
                 <Camera className="w-8 h-8 text-sage-600" />
               </div>
               <div className="text-center">
-                <p className="font-semibold text-sage-900">Take a photo or upload</p>
-                <p className="text-sm text-sage-500">JPG, PNG up to 10MB</p>
+                <p className="font-semibold text-sage-900">拍摄照片或上传</p>
+                <p className="text-sm text-sage-500">支持 JPG, PNG，最大 10MB</p>
               </div>
               <input 
                 type="file" 
@@ -254,7 +254,7 @@ export default function App() {
               <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-sage-100">
                 <div className="flex items-center gap-2 text-earth-600 mb-2">
                   <Sparkles className="w-4 h-4" />
-                  <span className="text-xs font-bold uppercase tracking-widest">Identified Plant</span>
+                  <span className="text-xs font-bold uppercase tracking-widest">已识别植物</span>
                 </div>
                 <h2 className="text-4xl font-serif font-bold text-sage-950 mb-1">{plantInfo.name}</h2>
                 <p className="text-sage-500 italic mb-4">{plantInfo.scientificName}</p>
@@ -267,7 +267,7 @@ export default function App() {
                     />
                   </div>
                   <span className="text-xs font-mono font-bold text-sage-600">
-                    {Math.round(plantInfo.confidence * 100)}% Confidence
+                    {Math.round(plantInfo.confidence * 100)}% 置信度
                   </span>
                 </div>
                 <p className="text-sage-700 leading-relaxed">
@@ -278,7 +278,7 @@ export default function App() {
               <div className="bg-earth-100 p-6 rounded-[2rem] border border-earth-200">
                 <div className="flex items-center gap-2 text-earth-700 mb-2">
                   <AlertCircle className="w-5 h-5" />
-                  <h4 className="font-bold">Common Issues</h4>
+                  <h4 className="font-bold">常见问题</h4>
                 </div>
                 <ul className="space-y-2">
                   {plantInfo.commonIssues.map((issue, idx) => (
@@ -295,45 +295,45 @@ export default function App() {
             <div className="lg:col-span-7 flex flex-col gap-6">
               <h3 className="text-2xl font-serif font-bold text-sage-900 flex items-center gap-2">
                 <Sprout className="w-6 h-6 text-sage-600" />
-                Care Instructions
+                养护指南
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <CareCard 
                   icon={Droplets} 
-                  label="Watering" 
+                  label="浇水" 
                   value={plantInfo.careInstructions.watering} 
                 />
                 <CareCard 
                   icon={Sun} 
-                  label="Light" 
+                  label="光照" 
                   value={plantInfo.careInstructions.light} 
                 />
                 <CareCard 
                   icon={ImageIcon} 
-                  label="Soil" 
+                  label="土壤" 
                   value={plantInfo.careInstructions.soil} 
                 />
                 <CareCard 
                   icon={Thermometer} 
-                  label="Temperature" 
+                  label="温度" 
                   value={plantInfo.careInstructions.temperature} 
                 />
                 <CareCard 
                   icon={Wind} 
-                  label="Humidity" 
+                  label="湿度" 
                   value={plantInfo.careInstructions.humidity} 
                 />
                 <CareCard 
                   icon={Leaf} 
-                  label="Fertilizing" 
+                  label="施肥" 
                   value={plantInfo.careInstructions.fertilizing} 
                 />
               </div>
 
               <div className="bg-sage-600 text-white p-8 rounded-[2.5rem] shadow-lg relative overflow-hidden">
                 <div className="relative z-10">
-                  <h4 className="text-sage-200 font-bold uppercase tracking-widest text-xs mb-2">Fun Fact</h4>
+                  <h4 className="text-sage-200 font-bold uppercase tracking-widest text-xs mb-2">趣味小知识</h4>
                   <p className="text-xl font-serif italic leading-relaxed">
                     "{plantInfo.funFact}"
                   </p>
@@ -350,8 +350,8 @@ export default function App() {
                     <MessageCircle className="w-6 h-6 text-sage-600" />
                   </div>
                   <div className="text-left">
-                    <p className="font-bold text-sage-900">Have more questions?</p>
-                    <p className="text-sm text-sage-500">Ask Flora, our gardening expert.</p>
+                    <p className="font-bold text-sage-900">还有更多问题？</p>
+                    <p className="text-sm text-sage-500">咨询我们的园艺专家 Flora。</p>
                   </div>
                 </div>
                 <ChevronRight className="w-6 h-6 text-sage-400 group-hover:translate-x-1 transition-transform" />
@@ -385,10 +385,10 @@ export default function App() {
                     <Leaf className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-sage-900">Flora Assistant</h3>
+                    <h3 className="font-bold text-sage-900">Flora 助手</h3>
                     <p className="text-xs text-sage-500 flex items-center gap-1">
                       <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                      Online
+                      在线
                     </p>
                   </div>
                 </div>
@@ -406,8 +406,8 @@ export default function App() {
                     <div className="bg-sage-50 p-6 rounded-full mb-4">
                       <MessageCircle className="w-12 h-12 text-sage-300" />
                     </div>
-                    <h4 className="font-serif text-xl font-bold text-sage-900 mb-2">Start a conversation</h4>
-                    <p className="text-sage-500">Ask anything about plant care, pests, or gardening tips!</p>
+                    <h4 className="font-serif text-xl font-bold text-sage-900 mb-2">开始对话</h4>
+                    <p className="text-sage-500">询问任何关于植物养护、病虫害或园艺技巧的问题！</p>
                   </div>
                 )}
                 {chatMessages.map((msg, idx) => (
@@ -431,7 +431,7 @@ export default function App() {
                       </div>
                     </div>
                     <span className="text-[10px] text-sage-400 mt-1 uppercase font-bold tracking-widest">
-                      {msg.role === 'user' ? 'You' : 'Flora'}
+                      {msg.role === 'user' ? '您' : 'Flora'}
                     </span>
                   </motion.div>
                 ))}
@@ -456,7 +456,7 @@ export default function App() {
                     type="text" 
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder="Ask a question..."
+                    placeholder="输入问题..."
                     className="w-full bg-white border border-sage-200 rounded-2xl py-4 pl-6 pr-14 focus:outline-none focus:ring-2 focus:ring-sage-500/20 focus:border-sage-500 transition-all shadow-sm"
                   />
                   <button 
@@ -477,9 +477,9 @@ export default function App() {
       <footer className="bg-white border-t border-sage-100 p-8 text-center">
         <div className="flex items-center justify-center gap-2 text-sage-400 mb-2">
           <Leaf className="w-4 h-4" />
-          <span className="text-xs font-bold uppercase tracking-widest">FloraCare AI</span>
+          <span className="text-xs font-bold uppercase tracking-widest">植护 AI</span>
         </div>
-        <p className="text-sm text-sage-500">Your companion for a greener home.</p>
+        <p className="text-sm text-sage-500">您的绿色家居伴侣。</p>
       </footer>
     </div>
   );
