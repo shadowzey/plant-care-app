@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+
+  --color-sage-50: #f4f7f4;
+  --color-sage-100: #e6ede6;
+  --color-sage-200: #ceddce;
+  --color-sage-300: #a8c1a8;
+  --color-sage-400: #7da07d;
+  --color-sage-500: #5d815d;
+  --color-sage-600: #486648;
+  --color-sage-700: #3b523b;
+  --color-sage-800: #314231;
+  --color-sage-900: #2a382a;
+  --color-sage-950: #161e16;
+
+  --color-earth-50: #fdf8f6;
+  --color-earth-100: #f9f0ec;
+  --color-earth-200: #f2dfd6;
+  --color-earth-300: #e7c4b6;
+  --color-earth-400: #d8a08c;
+  --color-earth-500: #c97d66;
+  --color-earth-600: #b8634d;
+  --color-earth-700: #9a503f;
+  --color-earth-800: #804437;
+  --color-earth-900: #6b3b31;
+  --color-earth-950: #391d18;
+}
+
+@layer base {
+  body {
+    @apply bg-sage-50 text-sage-950 font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+.markdown-body {
+  @apply prose max-w-none;
+}
+
+.markdown-body p {
+  @apply mb-4 leading-relaxed;
+}
+
+.markdown-body ul {
+  @apply list-disc pl-5 mb-4;
+}
+
+.markdown-body li {
+  @apply mb-1;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3 {
+  @apply font-serif font-bold mt-6 mb-3;
+}
+
